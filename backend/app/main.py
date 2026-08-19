@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from app.core.config import settings
+from .api import router
 
 
 
 app = FastAPI(title= settings.app_name, version= settings.app_version, description="DevMind API")
-
+app.include_router(router.router, prefix="/api", tags=["api"])
 
 class Item(BaseModel):
     name: str
